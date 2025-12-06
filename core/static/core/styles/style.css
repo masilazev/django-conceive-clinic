@@ -16,6 +16,12 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 350px;
     text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.login-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
 }
 
 .header {
@@ -23,6 +29,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .header p {
@@ -30,6 +37,11 @@ body {
     color: #888;
     font-weight: 400;
     margin-bottom: 20px;
+}
+
+.header:hover {
+    transform: scale(1.02);
+    cursor: pointer;
 }
 
 .logo-image {
@@ -103,6 +115,7 @@ body {
     margin-bottom: 20px;
     font-size: 14px;
     color: #495057;
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -120,7 +133,7 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #006059;
 }
 
 .actions {
@@ -150,4 +163,16 @@ body {
     margin-top:20px;
     width: 100%;
     text-align: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+    accent-color: #008c83; 
+    transition: accent-color 0.3s ease;
+    border: 1px solid #ced4da; 
+}
+
+.checkbox-group input[type="checkbox"]:hover,
+.checkbox-group input[type="checkbox"]:focus {
+    accent-color: #006059; 
+    cursor: pointer;
 }
