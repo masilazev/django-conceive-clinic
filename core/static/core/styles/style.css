@@ -1,0 +1,153 @@
+body {
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+}
+
+.login-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header p {
+    font-size: 14px;
+    color: #888;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: -15px;
+}
+
+.form-section h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #343a40;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.form-section p {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+}
+.input-wrapper {
+    position: relative;
+    display: block;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 10px 40px 10px 40px; 
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #008c83; 
+    font-size: 16px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #008c83; 
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.checkbox-group {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #495057;
+}
+
+.btn-primary {
+    background-color: #008c83;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.actions {
+    text-align: center;
+}
+
+.actions p {
+    font-size: 14px;
+    color: #495057;
+    margin: 5px 0;
+}
+
+.actions a {
+    color: #008c83;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.actions a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    bottom: 10px;
+    font-size: 12px;
+    color: #a0a0a0;
+    margin-top:20px;
+    width: 100%;
+    text-align: center;
+}
