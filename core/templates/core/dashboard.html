@@ -1,8 +1,207 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block title %}Conceive | Dashboard{% endblock %}
 
 {% block content %}
 
+<div class="dashboard-wrapper">
+
+    <!-- Saudação -->
+    <div class="dashboard-greeting">
+        <h1>Olá, Dr. {{ request.user.get_full_name|default:request.user.username }} 👋</h1>
+        <p>Aqui está o resumo da sua clínica hoje</p>
+    </div>
+
+    <!-- Cards de métricas -->
+    <div class="dashboard-cards">
+
+        <div class="metric-card">
+            <div class="metric-card-top">
+                <span class="metric-label">Agendamentos Hoje</span>
+                <span class="metric-badge positive">+8%</span>
+            </div>
+            <div class="metric-value">12</div>
+            <div class="metric-icon"><i class="fas fa-calendar-check"></i></div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-card-top">
+                <span class="metric-label">Pacientes Ativos</span>
+                <span class="metric-badge positive">+12%</span>
+            </div>
+            <div class="metric-value">1.284</div>
+            <div class="metric-icon"><i class="fas fa-users"></i></div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-card-top">
+                <span class="metric-label">Faturamento (Mês)</span>
+                <span class="metric-badge positive">+23%</span>
+            </div>
+            <div class="metric-value">R$ 87.420</div>
+            <div class="metric-icon"><i class="fas fa-dollar-sign"></i></div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-card-top">
+                <span class="metric-label">Taxa de Faltas</span>
+                <span class="metric-badge negative">+2%</span>
+            </div>
+            <div class="metric-value">8,2%</div>
+            <div class="metric-icon"><i class="fas fa-user-times"></i></div>
+        </div>
+
+    </div>
+
+    <!-- Botões de ação rápida -->
+    <div class="dashboard-actions">
+        <a href="#" class="action-btn primary">
+            <i class="fas fa-play-circle"></i> Iniciar Atendimento
+        </a>
+        <a href="#" class="action-btn secondary">
+            <i class="fas fa-calendar-plus"></i> Novo Agendamento
+        </a>
+        <a href="#" class="action-btn secondary">
+            <i class="fas fa-user-plus"></i> Novo Paciente
+        </a>
+        <a href="#" class="action-btn secondary">
+            <i class="fas fa-file-alt"></i> Relatório de atendimento
+        </a>
+        <a href="#" class="action-btn secondary">
+            <i class="fas fa-hand-holding-usd"></i> Repasses
+        </a>
+    </div>
+
+    <!-- Gráfico + Agenda -->
+    <div class="dashboard-bottom">
+
+        <div class="chart-card">
+            <div class="chart-card-header">
+                <div>
+                    <h3>Faturamento</h3>
+                    <span>Últimos 7 meses</span>
+                </div>
+                <div class="chart-legend">
+                    <span><i class="fas fa-circle" style="color:#008c83"></i> Receita</span>
+                    <span><i class="fas fa-circle" style="color:#b2dfdb"></i> Despesas</span>
+                </div>
+            </div>
+            <canvas id="faturamentoChart"></canvas>
+        </div>
+
+        <div class="agenda-card">
+            <div class="agenda-header">
+                <h3>Agenda do dia</h3>
+                <span class="agenda-count">6 atendimentos agendados</span>
+            </div>
+            <ul class="agenda-list">
+                <li class="agenda-item">
+                    <span class="agenda-time">08:00</span>
+                    <div class="agenda-info">
+                        <strong>Maria Santos</strong>
+                        <span>Consulta</span>
+                    </div>
+                    <span class="agenda-status consulta">Consulta</span>
+                </li>
+                <li class="agenda-item">
+                    <span class="agenda-time">08:30</span>
+                    <div class="agenda-info">
+                        <strong>João Oliveira</strong>
+                        <span>Retorno</span>
+                    </div>
+                    <span class="agenda-status retorno">Retorno</span>
+                </li>
+                <li class="agenda-item">
+                    <span class="agenda-time">09:00</span>
+                    <div class="agenda-info">
+                        <strong>Ana Costa</strong>
+                        <span>Exame</span>
+                    </div>
+                    <span class="agenda-status exame">Exame</span>
+                </li>
+                <li class="agenda-item">
+                    <span class="agenda-time">09:30</span>
+                    <div class="agenda-info">
+                        <strong>Pedro Alves</strong>
+                        <span>Consulta</span>
+                    </div>
+                    <span class="agenda-status consulta">Consulta</span>
+                </li>
+                <li class="agenda-item">
+                    <span class="agenda-time">10:00</span>
+                    <div class="agenda-info">
+                        <strong>Carla Mendes</strong>
+                        <span>Teleconsulta</span>
+                    </div>
+                    <span class="agenda-status teleconsulta">Teleconsulta</span>
+                </li>
+                <li class="agenda-item">
+                    <span class="agenda-time">10:30</span>
+                    <div class="agenda-info">
+                        <strong>Rafael Lima</strong>
+                        <span>Retorno</span>
+                    </div>
+                    <span class="agenda-status retorno">Retorno</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('faturamentoChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
+            datasets: [
+                {
+                    label: 'Receita',
+                    data: [52000, 58000, 61000, 70000, 75000, 80000, 87420],
+                    borderColor: '#008c83',
+                    backgroundColor: 'rgba(0, 140, 131, 0.08)',
+                    borderWidth: 2.5,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#008c83',
+                    tension: 0.4,
+                    fill: true,
+                },
+                {
+                    label: 'Despesas',
+                    data: [28000, 30000, 29000, 32000, 31000, 33000, 35000],
+                    borderColor: '#b2dfdb',
+                    backgroundColor: 'rgba(178, 223, 219, 0.08)',
+                    borderWidth: 2.5,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#b2dfdb',
+                    tension: 0.4,
+                    fill: true,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: {
+                    ticks: {
+                        callback: val => val >= 1000 ? (val / 1000) + 'k' : val,
+                        color: '#aaa',
+                        font: { size: 12 }
+                    },
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                },
+                x: {
+                    ticks: { color: '#aaa', font: { size: 12 } },
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+</script>
 
 {% endblock %}
